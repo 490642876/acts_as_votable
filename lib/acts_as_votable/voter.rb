@@ -18,7 +18,7 @@ module ActsAsVotable
 
       base.class_eval do
 
-        has_many :votes, :class_name => 'ActsAsVotable::Vote', :as => :voter, :dependent => :destroy do
+        has_many :votes, :class_name => 'Vote', :as => :voter, :dependent => :destroy do
           def votables
             includes(:votable).map(&:votable)
           end
@@ -103,7 +103,7 @@ module ActsAsVotable
 
     # Including polymporphic relations for eager loading
     def include_objects
-      ActsAsVotable::Vote.includes(:votable)
+      Vote.includes(:votable)
     end
 
     def find_voted_items extra_conditions = {}
